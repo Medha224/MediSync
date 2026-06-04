@@ -1,0 +1,7 @@
+/* Clean default vite styles */
+#root {
+  max-width: 100vw;
+  margin: 0;
+  padding: 0;
+  text-align: left;
+}

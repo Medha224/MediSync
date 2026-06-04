@@ -1,0 +1,145 @@
+.appointments-page {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.filter-tabs {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 1rem;
+}
+
+.filter-tab {
+  background: transparent;
+  color: var(--text-secondary);
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-sm);
+  transition: var(--transition);
+}
+
+.filter-tab:hover {
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.filter-tab.active {
+  background: rgba(16, 185, 129, 0.1);
+  color: var(--accent-primary);
+}
+
+.appointments-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.appointment-card {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border-color);
+  padding: 1.5rem;
+  border-radius: var(--radius-md);
+  transition: var(--transition);
+}
+
+.appointment-card:hover {
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateX(4px);
+}
+
+.app-time-block {
+  display: flex;
+  flex-direction: column;
+  min-width: 120px;
+}
+
+.app-date {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.app-time {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.app-details {
+  flex: 1;
+}
+
+.app-details h4 {
+  font-size: 1.1rem;
+  margin-bottom: 0.25rem;
+}
+
+.app-details p {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+.app-status {
+  min-width: 120px;
+}
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.8rem;
+  border-radius: 99px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.status-scheduled {
+  background: rgba(16, 185, 129, 0.1);
+  color: var(--accent-primary);
+}
+
+.status-completed {
+  background: rgba(16, 185, 129, 0.1);
+  color: var(--success);
+}
+
+.status-cancelled {
+  background: rgba(239, 68, 68, 0.1);
+  color: var(--danger);
+}
+
+.app-actions {
+  display: flex;
+  gap: 0.5rem;
+  min-width: 80px;
+}
+
+.action-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  transition: var(--transition);
+}
+
+.success-btn {
+  background: rgba(16, 185, 129, 0.2);
+  color: var(--success);
+}
+.success-btn:hover { background: var(--success); color: white; }
+
+.danger-btn {
+  background: rgba(239, 68, 68, 0.2);
+  color: var(--danger);
+}
+.danger-btn:hover { background: var(--danger); color: white; }
+
+.modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; z-index: 1000; backdrop-filter: blur(4px); } .modal-content { width: 100%; max-width: 500px; max-height: 90vh; overflow-y: auto; } .modal-content h2 { margin-bottom: 1.5rem; } .modal-actions { display: flex; justify-content: flex-end; gap: 1rem; margin-top: 2rem; } .form-group { margin-bottom: 1rem; } .form-group label { display: block; margin-bottom: 0.5rem; color: var(--text-secondary); font-size: 0.9rem; } .form-group input, .form-select { width: 100%; padding: 0.75rem 1rem; border-radius: var(--radius-sm); background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border-color); color: var(--text-primary); transition: var(--transition); } .form-group input:focus, .form-select:focus { border-color: var(--accent-primary); background: rgba(255, 255, 255, 0.1); } .form-select option { background: var(--bg-secondary); color: white; }
