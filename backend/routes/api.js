@@ -144,7 +144,7 @@ router.get('/analytics/appointments-heatmap', async (req, res) => {
 });
 
 // --- Google Authentication & Registration ---
-const GOOGLE_CLIENT_ID = '384829527690-voqjtrcemou5e1428i2rah3dninkqk7u.apps.googleusercontent.com';
+const GOOGLE_CLIENT_ID = '591216304352-ltmt0cn7ivo8guov86pbt89p1hbqgsd8.apps.googleusercontent.com';
 const googleClient = new OAuth2Client(GOOGLE_CLIENT_ID);
 
 router.post('/auth/google', async (req, res) => {
