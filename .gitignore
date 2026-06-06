@@ -1,0 +1,21 @@
+# Dependencies
+node_modules/
+**/node_modules/
+
+# Production build outputs
+dist/
+**/dist/
+build/
+**/build/
+
+# Local env files
+.env
+**/.env
+.env.local
+.env.*.local
+
+# Logs and system files
+*.log
+.DS_Store
+Thumbs.db
+.gemini/

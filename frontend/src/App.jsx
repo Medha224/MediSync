@@ -11,18 +11,33 @@ import 'react-big-calendar/lib/css/react-big-calendar.css';
 import './App.css';
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [currentUser, setCurrentUser] = useState(null);
+  
+   const [isAuthenticated, setIsAuthenticated] = useState(
+  !!localStorage.getItem("user")
+);
+
+const [currentUser, setCurrentUser] = useState(() => {
+  try {
+    const user = localStorage.getItem("user");
+    return user ? JSON.parse(user) : null;
+  } catch (error) {
+    return null;
+  }
+});
 
   const handleLogin = (user) => {
-    setIsAuthenticated(true);
-    setCurrentUser(user);
-  };
+  localStorage.setItem("user", JSON.stringify(user));
+
+  setCurrentUser(user);
+  setIsAuthenticated(true);
+};
 
   const handleLogout = () => {
-    setIsAuthenticated(false);
-    setCurrentUser(null);
-  };
+  localStorage.removeItem("user");
+
+  setCurrentUser(null);
+  setIsAuthenticated(false);
+};
 
   return (
     <Router>

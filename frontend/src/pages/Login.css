@@ -134,4 +134,141 @@
   box-shadow: 0 8px 28px rgba(0,168,85,.45);
 }
 
+/* Google Sign-in Wrapper */
+.google-signin-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 24px;
+  width: 100%;
+}
+
+.google-signin-wrapper > div {
+  width: 100% !important;
+}
+
+/* Demo buttons group */
+.demo-btn-group {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.demo-role-btn {
+  flex: 1;
+  padding: 14px;
+  background: var(--bg3);
+  border: 1px solid var(--border2);
+  border-radius: 13px;
+  color: var(--text);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.demo-role-btn:hover {
+  background: var(--card2);
+  border-color: var(--green3);
+  color: var(--green2);
+  transform: translateY(-1px);
+}
+
+/* Error Toast inside the login card */
+.login-error-toast {
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: #f87171;
+  padding: 12px;
+  border-radius: 12px;
+  font-size: 14px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Form group and Inputs for Registration */
+.register-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.register-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  text-align: center;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+
+.register-sub {
+  color: var(--text2);
+  text-align: center;
+  font-size: 13px;
+  line-height: 1.5;
+  margin-bottom: 12px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.input-label {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text2);
+}
+
+.form-input {
+  width: 100%;
+  padding: 14px;
+  border-radius: 13px;
+  background: var(--bg3);
+  border: 1px solid var(--border2);
+  color: var(--text);
+  outline: none;
+  font-family: inherit;
+  transition: var(--transition);
+}
+
+.form-input:focus {
+  border-color: var(--green3);
+  box-shadow: 0 0 0 3px rgba(0, 201, 106, 0.1);
+}
+
+/* Role Choice button group */
+.role-btn-group {
+  display: flex;
+  gap: 12px;
+  margin-top: 4px;
+}
+
+.role-choice-btn {
+  flex: 1;
+  padding: 12px;
+  border-radius: 12px;
+  background: var(--bg3);
+  border: 1px solid var(--border2);
+  color: var(--text2);
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.role-choice-btn.active {
+  background: linear-gradient(135deg, var(--green2), var(--green3));
+  border-color: transparent;
+  color: #fff;
+  box-shadow: 0 4px 15px rgba(0, 168, 85, 0.25);
+}
+
+.role-choice-btn:not(.active):hover {
+  background: var(--card2);
+  color: var(--text);
+}
+
+
 

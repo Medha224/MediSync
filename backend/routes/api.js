@@ -3,6 +3,8 @@ const router = express.Router();
 const Patient = require('../models/Patient');
 const Doctor = require('../models/Doctor');
 const Appointment = require('../models/Appointment');
+const { OAuth2Client } = require('google-auth-library');
+
 
 // --- Patients ---
 router.get('/patients', async (req, res) => {
@@ -137,6 +139,114 @@ router.get('/analytics/appointments-heatmap', async (req, res) => {
 
     res.json(result);
   } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// --- Google Authentication & Registration ---
+const GOOGLE_CLIENT_ID = '384829527690-voqjtrcemou5e1428i2rah3dninkqk7u.apps.googleusercontent.com';
+const googleClient = new OAuth2Client(GOOGLE_CLIENT_ID);
+
+router.post('/auth/google', async (req, res) => {
+  const { credential } = req.body;
+  if (!credential) {
+    return res.status(400).json({ error: 'Credential token is required' });
+  }
+
+  try {
+    const ticket = await googleClient.verifyIdToken({
+      idToken: credential,
+      audience: GOOGLE_CLIENT_ID,
+    });
+    const payload = ticket.getPayload();
+    const { email, name } = payload;
+
+    // Check Doctor
+    const doctor = await Doctor.findOne({ email });
+    if (doctor) {
+      return res.json({
+        status: 'success',
+        user: {
+          role: 'Doctor',
+          id: doctor._id,
+          name: doctor.name,
+          email: doctor.email
+        }
+      });
+    }
+
+    // Check Patient
+    const patient = await Patient.findOne({ email });
+    if (patient) {
+      return res.json({
+        status: 'success',
+        user: {
+          role: 'Patient',
+          id: patient._id,
+          name: patient.name,
+          email: patient.email
+        }
+      });
+    }
+
+    // Unregistered
+    return res.json({
+      status: 'unregistered',
+      email,
+      name
+    });
+  } catch (err) {
+    console.error('Google verification error:', err);
+    res.status(401).json({ error: 'Invalid Google token' });
+  }
+});
+
+router.post('/auth/register', async (req, res) => {
+  const { role, name, email, phone, specialty, dateOfBirth, gender } = req.body;
+  if (!role || !name || !email || !phone) {
+    return res.status(400).json({ error: 'Missing required fields' });
+  }
+
+  try {
+    if (role === 'Doctor') {
+      if (!specialty) {
+        return res.status(400).json({ error: 'Specialty is required for doctors' });
+      }
+      const existingDoctor = await Doctor.findOne({ email });
+      if (existingDoctor) {
+        return res.status(400).json({ error: 'Doctor with this email already exists' });
+      }
+
+      const doctor = new Doctor({ name, email, phone, specialty, availability: [] });
+      await doctor.save();
+      return res.status(201).json({
+        role: 'Doctor',
+        id: doctor._id,
+        name: doctor.name,
+        email: doctor.email
+      });
+    } else if (role === 'Patient') {
+      if (!dateOfBirth || !gender) {
+        return res.status(400).json({ error: 'Date of birth and gender are required for patients' });
+      }
+      const existingPatient = await Patient.findOne({ email });
+      if (existingPatient) {
+        return res.status(400).json({ error: 'Patient with this email already exists' });
+      }
+
+      const patient = new Patient({ name, email, phone, dateOfBirth, gender });
+      await patient.save();
+      return res.status(201).json({
+        role: 'Patient',
+        id: patient._id,
+        name: patient.name,
+        email: patient.email
+      });
+    } else {
+      return res.status(400).json({ error: 'Invalid role' });
+    }
+  } catch (err) {
+    console.error('Registration error:', err);
     res.status(500).json({ error: err.message });
   }
 });
